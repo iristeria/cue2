@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#171717"><title>Cue｜趣遇</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f5f2ec;color:#181818;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",Arial,sans-serif}
+button,input{font:inherit}button{cursor:pointer}.app{min-height:100vh;display:flex;justify-content:center}.phone{width:100%;max-width:480px;min-height:100vh;background:#f5f2ec;position:relative;overflow:hidden}
+header{height:70px;padding:18px 22px;display:flex;justify-content:space-between;align-items:center}.logo{font-size:25px;font-weight:900;letter-spacing:-1px}.logo i{font-style:normal;color:#ff5a5f;font-weight:600}.menu{border:0;background:#fff;border-radius:50%;width:38px;height:38px}
+.screen{display:none;padding:6px 22px 105px}.screen.active{display:block}.eyebrow{font-size:11px;font-weight:900;letter-spacing:1.5px;color:#ff5a5f;text-transform:uppercase;margin:16px 0 9px}
+h1{letter-spacing:-1.8px}.hero h1{font-size:42px;line-height:1.02;margin:0 0 15px}.hero p,.muted{color:#777;line-height:1.65}.accent{color:#ff5a5f}.btn{width:100%;padding:16px;border-radius:17px;border:0;background:#191919;color:#fff;font-weight:850;margin-top:10px}.btn.red{background:#ff5a5f}.btn.light{background:#fff;color:#191919;border:1px solid #e6e1d9}
+.card{background:#fff;border-radius:24px;box-shadow:0 12px 35px #0000000b;overflow:hidden}.profile-img{height:350px;background:linear-gradient(145deg,#f3c0a3,#91bfc0);display:flex;align-items:flex-end;padding:22px;font-size:95px}.profile-info{padding:19px}.profile-info h2{margin:0;font-size:27px}.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.tag{background:#f2efe9;padding:7px 11px;border-radius:99px;font-size:12px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:18px 0}.choice{background:#fff;border:1.5px solid #e5e0d8;border-radius:18px;padding:15px;text-align:left;min-height:105px}.choice.selected{border-color:#ff5a5f;box-shadow:0 0 0 3px #ff5a5f18}.choice .emoji{font-size:29px}.choice b{display:block;margin-top:7px}.choice small{color:#888;display:block;margin-top:4px}
+.scene{background:#191919;color:white;border-radius:25px;padding:23px;margin:18px 0}.scene .emoji{font-size:45px}.scene h2{margin:7px 0;font-size:29px}.scene p{color:#bbb;line-height:1.5}.roles{display:flex;gap:10px}.role{flex:1;background:#fff;border:1px solid #e5e0d8;border-radius:17px;padding:15px}.role small{color:#888}.role b{display:block;margin-top:5px}.mission{background:#fff4ec;border:1px solid #ffd8c7;border-radius:15px;padding:13px;margin:13px 0;font-size:13px;line-height:1.5}
+.match{text-align:center;padding-top:35px}.avatars{display:flex;justify-content:center;align-items:center;margin:28px 0}.avatar{width:120px;height:120px;border-radius:50%;display:grid;place-items:center;background:#efc2a9;font-size:55px;border:6px solid #f5f2ec}.avatar+.avatar{margin-left:-24px;background:#a9d0d0}.heart{position:absolute;background:#ff5a5f;color:#fff;width:48px;height:48px;border-radius:50%;display:grid;place-items:center;border:5px solid #f5f2ec}
+.chat{height:calc(100vh - 150px);display:flex;flex-direction:column}.chathead{background:#fff;border-radius:18px;padding:12px;display:flex;gap:11px;align-items:center}.mini{width:45px;height:45px;border-radius:50%;background:#efc2a9;display:grid;place-items:center;font-size:23px}.timer{margin-left:auto;color:#ff5a5f;font-weight:900}.messages{flex:1;overflow:auto;padding:10px 1px}.bubble{max-width:79%;padding:12px 15px;border-radius:18px;margin:8px 0;line-height:1.5;font-size:14px}.them{background:#fff;border-bottom-left-radius:5px}.me{margin-left:auto;background:#191919;color:#fff;border-bottom-right-radius:5px}.composer{display:flex;gap:8px;padding-top:9px}.composer input{flex:1;border:1px solid #ded9d1;border-radius:16px;padding:14px;background:#fff;outline:0}.send{width:53px;border:0;border-radius:16px;background:#ff5a5f;color:#fff;font-size:19px}
+.end{text-align:center;padding-top:42px}.end h1{font-size:38px}.decision{display:grid;gap:12px;margin-top:25px}.decision button{padding:18px;border-radius:18px;background:#fff;border:1px solid #e2ddd5;text-align:left}.decision strong{display:block;font-size:17px}.decision span{display:block;color:#777;font-size:13px;margin-top:3px}.decision .yes{background:#191919;color:white}.decision .yes span{color:#bbb}
+.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(480px,100%);height:76px;background:#fff;border-top:1px solid #e7e2da;display:flex;justify-content:space-around;align-items:center;z-index:10}.nav button{background:none;border:0;color:#999;font-size:11px;font-weight:700}.nav button.active{color:#181818}.nav b{display:block;font-size:22px;margin-bottom:2px}
+.toast{position:fixed;z-index:30;bottom:92px;left:50%;transform:translate(-50%,20px);background:#191919;color:#fff;padding:11px 15px;border-radius:12px;font-size:13px;opacity:0;transition:.2s}.toast.show{opacity:1;transform:translate(-50%,0)}
+.list{background:#fff;border-radius:18px;overflow:hidden;margin-top:16px}.item{display:flex;gap:12px;padding:14px;border-bottom:1px solid #eee8df}.item:last-child{border:0}.item .e{font-size:27px}.item small{display:block;color:#888;margin-top:3px}
+@media(min-width:600px){body{padding:20px}.phone{min-height:calc(100vh - 40px);border-radius:30px;box-shadow:0 20px 70px #0002}.nav{border-radius:0 0 30px 30px}}
+</style>
+</head>
+<body><div class="app"><main class="phone">
+<header><div class="logo">Cue <i>趣遇</i></div><button class="menu" onclick="go('scenes')">☰</button></header>
+
+<section id="home" class="screen active">
+<div class="hero"><div class="eyebrow">Dating · 但不一樣</div>
+<h1>不要從「嗨」開始。<br><span class="accent">從一場戲開始。</span></h1>
+<p>配對成功後，不用煩惱第一句要說什麼。選一個情境，拿一個角色，和陌生人一起玩五分鐘。</p></div>
+<div class="card"><div class="profile-img">👩🏻</div><div class="profile-info"><h2>Emma, 29</h2><p class="muted">設計師 · 咖啡 · 滑雪</p><div class="tags"><span class="tag">🎨 創意</span><span class="tag">✈️ 旅行</span><span class="tag">🐕 狗狗</span></div></div></div>
+<button class="btn red" onclick="go('match')">♡ 喜歡 Emma</button>
+<button class="btn light" onclick="go('scenes')">先看看有哪些情境</button>
+</section>
+
+<section id="match" class="screen"><div class="match"><div class="eyebrow">配對成功</div><h1>你們配對了！</h1><div class="avatars"><div class="avatar">👩🏻</div><div class="avatar">👨🏻</div><div class="heart">♥</div></div><p class="muted">與其想「第一句要說什麼？」<br>不如直接進入一個故事。</p><button class="btn red" onclick="go('scenes')">選一個情境 →</button></div></section>
+
+<section id="scenes" class="screen"><div class="eyebrow">第一步 · 選擇情境</div><h1 style="font-size:34px;margin:0">你想在哪裡遇見他？</h1><p class="muted">選一個你覺得有趣的世界，角色會隨機分配。</p><div class="grid" id="sceneGrid"></div>
+<button class="btn red" onclick="confirmScene()">選好了，下一步 →</button>
+<button class="btn light" onclick="randomScene()">🎲 幫我隨機一個</button></section>
+
+<section id="roles" class="screen"><div class="eyebrow">第二步 · 進入角色</div><div class="scene"><div class="emoji" id="rEmoji"></div><h2 id="rScene"></h2><p id="rDesc"></p></div>
+<div class="roles"><div class="role"><small>你的角色</small><b id="myRole"></b></div><div class="role"><small>Emma 的角色</small><b id="herRole"></b></div></div>
+<div class="mission"><b>🎯 你的秘密任務</b><br><span id="mission"></span></div>
+<p class="muted" style="font-size:12px">對方不會知道你的任務。五分鐘後，你們可以選擇要不要繼續認識。</p>
+<button class="btn red" onclick="start()">🎬 開始角色扮演</button><button class="btn light" onclick="go('scenes')">← 換一個情境</button></section>
+
+<section id="roleplay" class="screen"><div class="chat"><div class="chathead"><div class="mini">👩🏻</div><div><b>Emma, 29</b><div style="font-size:11px;color:#888">角色扮演中 · <span id="chatScene"></span></div></div><div class="timer" id="timer">5:00</div></div><div class="mission"><b>🎯 秘密任務：</b><span id="chatMission"></span></div><div class="messages" id="messages"></div><div class="composer"><input id="input" placeholder="保持角色，回覆對方…" onkeydown="if(event.key==='Enter')send()"><button class="send" onclick="send()">↑</button></div></div></section>
+
+<section id="decision" class="screen"><div class="end"><div class="eyebrow">五分鐘結束</div><h1>🎬 Cut！</h1><p class="muted">角色扮演結束了。<br>現在，決定要不要繼續認識這個人。</p><div class="decision"><button class="yes" onclick="stay()"><strong>❤️ 繼續聊下去</strong><span>結束角色扮演，進入正常聊天</span></button><button onclick="leave()"><strong>👋 就到這裡</strong><span>結束對話，雙方都不能再傳訊息</span></button></div></div></section>
+
+<section id="normal" class="screen"><div class="eyebrow">角色已結束</div><h1 style="font-size:35px">現在做回你自己。</h1><p class="muted">你們都選擇繼續。接下來就是普通聊天。</p><div class="messages" id="normalMessages" style="height:48vh"></div><div class="composer"><input id="normalInput" placeholder="說點什麼吧…" onkeydown="if(event.key==='Enter')normalSend()"><button class="send" onclick="normalSend()">↑</button></div></section>
+
+<section id="ended" class="screen"><div class="end"><div style="font-size:75px">👋</div><h1>這場戲結束了。</h1><p class="muted">你選擇不繼續。這段對話已關閉，你們彼此都不能再傳送訊息。</p><button class="btn red" onclick="go('home')">回到配對</button></div></section>
+
+<section id="discover" class="screen"><div class="eyebrow">Scene Library</div><h1 style="font-size:35px">20 個世界。</h1><p class="muted">每個情境都可以搭配不同角色與秘密任務，產生數千種不同的第一次對話。</p><div class="list" id="list"></div></section>
+
+<nav class="nav"><button id="n1" class="active" onclick="go('home')"><b>♡</b>配對</button><button id="n2" onclick="go('match')"><b>✦</b>Match</button><button id="n3" onclick="go('discover')"><b>◉</b>情境</button></nav>
+<div id="toast" class="toast"></div>
+</main></div>
+
+<script>
+const scenes=[
+["🏢","辦公室","星期一早上，會議開始前發生了一件意外。","新進員工","CEO"],
+["✈️","機場","航班延誤了，而且有人坐了你的位子。","迷路旅客","機場安檢人員"],
+["🚆","火車","火車停在兩站之間，你們只有五分鐘。","陌生乘客","列車長"],
+["☕","咖啡廳","店裡只剩最後一個位子，而你們都想坐。","常客","咖啡師"],
+["🍸","酒吧","有人點錯了飲料。或者……他是故意的？","酒保","神秘客人"],
+["🏨","飯店","兩位房客、一間房，還有一筆奇怪的訂單。","房客","飯店經理"],
+["🏝️","荒島","你醒來了，而且你不是一個人。","倖存者","陌生人"],
+["🚀","太空站","氧氣警報突然響了。","太空站指揮官","太空旅客"],
+["🕵️","偵探事務所","一件重要的東西消失了。","偵探","嫌疑犯"],
+["🏦","銀行搶案","計畫和原本想像的完全不一樣。","幕後主謀","藝術大盜"],
+["👑","皇宮","一場秘密會議正在門後進行。","皇室顧問","神秘皇室成員"],
+["🏰","中世紀酒館","一場任務需要兩個完全不一樣的英雄。","騎士","尋寶者"],
+["🎬","電影片場","男主角突然沒有出現。","導演","新人演員"],
+["🎤","演唱會後台","表演開始前只剩五分鐘。","流行歌手","舞台經理"],
+["🏥","醫院","今天的預約似乎有些不尋常。","醫生","病人"],
+["🎓","大學","你被分配到一個非常意外的搭檔。","教授","學生"],
+["🏋️","健身房","有人一直在使用你的置物櫃。","私人教練","健身房常客"],
+["🍳","料理節目","你必須在五分鐘內完成一道從沒做過的菜。","名廚","參賽者"],
+["🪐","火星殖民地","地球剛剛傳來一則緊急訊息。","殖民地指揮官","新移民"],
+["💍","婚禮","婚禮五分鐘後開始，但有一樣東西不見了。","婚禮企劃","婚禮賓客"]
+];
+const roles=["CEO","實習生","新進員工","嚴格主管","競爭同事","HR 經理","辦公室八卦王","過勞員工","神秘顧問","準備離職的員工","迷路旅客","空服員","機場安檢人員","旅遊部落客","背包客","奢華旅客","錯過班機的人","坐錯位子的陌生人","導遊","秘密特工","酒保","常客","明星","明星保鑣","婚禮賓客","婚禮企劃","派對陌生人","認識所有人的人","獨自赴會的人","神秘朋友","電影導演","電影明星","新人演員","影評人","實境節目參賽者","流行歌手","選秀評審","狗仔隊","舞台劇演員","電影製片","偵探","嫌疑犯","幕後主謀","警察","藝術大盜","間諜","駭客","尋寶者","囚犯","神秘陌生人"];
+let selected=0,myRole="",herRole="",mission="",time=300,timerID=null;
+
+function render(){
+ document.getElementById("sceneGrid").innerHTML=scenes.map((s,i)=>`<button class="choice ${i===selected?"selected":""}" onclick="selectScene(${i})"><span class="emoji">${s[0]}</span><b>${s[1]}</b><small>${i<6?"日常":i<13?"有趣":"超展開"}</small></button>`).join("");
+ document.getElementById("list").innerHTML=scenes.map(s=>`<div class="item"><div class="e">${s[0]}</div><div><b>${s[1]}</b><small>${s[2]}</small></div></div>`).join("");
+}
+function selectScene(i){selected=i;render();toast("已選擇「"+scenes[i][1]+"」");}
+function randomScene(){selected=Math.floor(Math.random()*scenes.length);render();toast("🎲 幫你選好了："+scenes[selected][1]);}
+function confirmScene(){loadRoles();go("roles");}
+function loadRoles(){
+ const s=scenes[selected];document.getElementById("rEmoji").textContent=s[0];document.getElementById("rScene").textContent=s[1];document.getElementById("rDesc").textContent=s[2];
+ myRole=s[3];herRole=s[4]; // use scenario-native roles for the initial prototype
+ document.getElementById("myRole").textContent=myRole;document.getElementById("herRole").textContent=herRole;
+ const ms=["想辦法讓對方笑一次。","在五分鐘內讓對方相信你。","找出對方真正來這裡的原因。","讓對方答應一個荒謬但有趣的計畫。","發現對方正在隱瞞的事情。","找到一個理由，讓你們必須一起合作。"];
+ mission=ms[Math.floor(Math.random()*ms.length)];document.getElementById("mission").textContent=mission;
+}
+function go(id){
+ document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active"));document.getElementById(id).classList.add("active");window.scrollTo(0,0);
+ document.querySelectorAll(".nav button").forEach(x=>x.classList.remove("active"));if(id==="home")n1.classList.add("active");else if(id==="match")n2.classList.add("active");else if(id==="discover"||id==="scenes")n3.classList.add("active");
+}
+function start(){
+ go("roleplay");time=300;clearInterval(timerID);document.getElementById("timer").textContent="5:00";document.getElementById("chatScene").textContent=scenes[selected][1];document.getElementById("chatMission").textContent=mission;document.getElementById("messages").innerHTML="";
+ const opens=[
+  `「${herRole}」：你就是那個新來的人？我有件事想問你。`,
+  `「${herRole}」：先別緊張。我們只有五分鐘，告訴我你會怎麼處理現在這個情況。`
+ ];add("them",opens[0]);setTimeout(()=>add("them",opens[1]),650);
+ timerID=setInterval(()=>{time--;document.getElementById("timer").textContent=Math.floor(time/60)+":"+String(time%60).padStart(2,"0");if(time<=0){clearInterval(timerID);go("decision")}},1000);
+}
+function add(type,text){let d=document.createElement("div");d.className="bubble "+type;d.textContent=text;document.getElementById("messages").appendChild(d);document.getElementById("messages").scrollTop=99999}
+function send(){let i=document.getElementById("input"),t=i.value.trim();if(!t)return;add("me",t);i.value="";setTimeout(()=>{let r=["嗯……這回答比我預期的有趣。","你確定？我覺得事情沒有那麼簡單。","好，我暫時相信你。","等等，你剛剛說的是真的嗎？","我開始覺得你可能比我想像中更適合這個角色。"];add("them",r[Math.floor(Math.random()*r.length)])},600)}
+function stay(){go("normal");document.getElementById("normalMessages").innerHTML='<div class="bubble them">所以……剛剛那場戲，你覺得好玩嗎？😂</div>'}
+function leave(){clearInterval(timerID);go("ended")}
+function normalSend(){let i=document.getElementById("normalInput"),t=i.value.trim();if(!t)return;let d=document.createElement("div");d.className="bubble me";d.textContent=t;document.getElementById("normalMessages").appendChild(d);i.value=""}
+function toast(t){let x=document.getElementById("toast");x.textContent=t;x.classList.add("show");setTimeout(()=>x.classList.remove("show"),1500)}
+render();
+</script></body></html>
